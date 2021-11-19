@@ -6,7 +6,7 @@
 #include <sys/wait.h>
 
 int main() {
-	system("./OS03_05_1");
+	system("./03_05_1");
 	for (int i = 0; i < 100; i++) {
 		sleep(2);
 		printf("os03_06 PID: %d-#%d\n", getpid(), i);
