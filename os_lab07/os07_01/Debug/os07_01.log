@@ -1,0 +1,4 @@
+﻿  os07_01.cpp
+T:\Uni\5_sem\OS\OS_5_sem\os_lab07\os07_01\os07_01.cpp(21,28): warning C4244: аргумент: преобразование "float" в "DWORD", возможна потеря данных
+T:\Uni\5_sem\OS\OS_5_sem\os_lab07\os07_01\os07_01.cpp(22,28): warning C4244: аргумент: преобразование "float" в "DWORD", возможна потеря данных
+  os07_01.vcxproj -> T:\Uni\5_sem\OS\OS_5_sem\os_lab07\Debug\os07_01.exe
