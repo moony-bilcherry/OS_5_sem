@@ -7,8 +7,31 @@
 #include <pthread.h>
 #include <sys/syscall.h>
 #include <sched.h>
+#include <time.h>
+int nanosleep(const struct timespec *req, struct timespec *rem);
 
 pthread_mutex_t mx;
+
+int msleep(long msec)
+{
+    struct timespec ts;
+    int res;
+
+    if (msec < 0)
+    {
+        errno = EINVAL;
+        return -1;
+    }
+
+    ts.tv_sec = msec / 1000;
+    ts.tv_nsec = (msec % 1000) * 1000000;
+
+    do {
+        res = nanosleep(&ts, &ts);
+    } while (res && errno == EINTR);
+
+    return res;
+}
 
 void* thread1(void* arg)
 {
@@ -21,7 +44,9 @@ void* thread1(void* arg)
             		pthread_mutex_unlock(&mx);
             		printf("\n\t!! thread 1 unlocked\n");
         	}
-		usleep(100000);
+		//usleep(100);
+		//sleep(1);
+		msleep(100);
         	printf("child 1: %d\n", i);
 	}
 
@@ -39,7 +64,8 @@ void* thread2(void* arg)
             		pthread_mutex_unlock(&mx);
             		printf("\n\t!! thread 2 unlocked\n");
         	}
-		usleep(100000);
+		//usleep(100);
+		msleep(100);
         	printf("child 2: %d\n", i);
 	}
     pthread_exit("child 2 thread");
@@ -47,34 +73,34 @@ void* thread2(void* arg)
 
 int main() {
 
-    pthread_mutex_init(&mx, NULL);
-    pthread_t a_th1, a_th2;
-    void *r_th1, *r_th2;
+    	pthread_mutex_init(&mx, NULL);
+    	pthread_t a_th1, a_th2;
+    	void *r_th1, *r_th2;
 	pid_t pid = getpid();
 
-    printf("main: pid = %d\n", pid);
+    	printf("main: pid = %d\n", pid);
 
-    int res1 = pthread_create(&a_th1, NULL, thread1, NULL);
-    int res2 = pthread_create(&a_th2, NULL, thread2, NULL);
-    void* mem = malloc(1024*1024);
+    	int res1 = pthread_create(&a_th1, NULL, thread1, NULL);
+    	int res2 = pthread_create(&a_th2, NULL, thread2, NULL);
+    	void* mem = malloc(1024*1024);
 
 	for(int i = 0; i < 90; i++) {
-        if (i == 30) 
-        {
-            pthread_mutex_lock(&mx);
-            printf("\n\t!! MAIN thread locked\n");
-        }
-        if (i == 60) 
-        {
-            pthread_mutex_unlock(&mx);
-            printf("\n\t!! MAIN thread unlocked\n");
-        }
-        usleep(100000);
+        	if (i == 30) {
+            		pthread_mutex_lock(&mx);
+            		printf("\n\t!! MAIN thread locked\n");
+        	}
+        	if (i == 60) {
+            		pthread_mutex_unlock(&mx);
+            		printf("\n\t!! MAIN thread unlocked\n");
+        	}
+        	//usleep(100);
+        	msleep(100);
 		printf("main:   %d\n", i);
 	}
 	
-    int status1 = pthread_join(a_th1, (void**)&r_th1);
+    	int status1 = pthread_join(a_th1, (void**)&r_th1);
 	int status2 = pthread_join(a_th2, (void**)&r_th2);
-    pthread_mutex_destroy(&mx);
-    exit(0);
+	
+    	pthread_mutex_destroy(&mx);
+    	exit(0);
 }

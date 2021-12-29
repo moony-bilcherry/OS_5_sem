@@ -1,0 +1,6 @@
+﻿  os09_04.cpp
+T:\Uni\5_sem\OS\OS_5_sem\os_lab09\os09_04\os09_04.cpp(69,52): warning C4244: инициализация: преобразование "LONGLONG" в "unsigned int", возможна потеря данных
+T:\Uni\5_sem\OS\OS_5_sem\os_lab09\os09_04\os09_04.cpp(70,6): warning C4244: аргумент: преобразование "LONGLONG" в "size_t", возможна потеря данных
+T:\Uni\5_sem\OS\OS_5_sem\os_lab09\os09_04\os09_04.cpp(72,36): warning C4244: аргумент: преобразование "LONGLONG" в "DWORD", возможна потеря данных
+T:\Uni\5_sem\OS\OS_5_sem\os_lab09\os09_04\os09_04.cpp(97): warning C4715: printWatchRowFileTxt: значение возвращается не при всех путях выполнения
+  os09_04.vcxproj -> T:\Uni\5_sem\OS\OS_5_sem\os_lab09\Debug\os09_04.exe

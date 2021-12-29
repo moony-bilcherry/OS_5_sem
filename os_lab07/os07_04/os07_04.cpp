@@ -3,6 +3,7 @@
 #include <ctime>
 
 int main() {
+	// атрибуты защиты, кол-во свободных ресурсов при инициализации, всего, имя
 	HANDLE hs = CreateSemaphore(NULL, 2, 3, L"Semaphore");
 
 	LPCWSTR pathA = L"T:\\Uni\\5_sem\\OS\\OS_5_sem\\os_lab07\\Debug\\os07_04A.exe";

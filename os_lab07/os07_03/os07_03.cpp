@@ -13,6 +13,9 @@ int main() {
 
 	ZeroMemory(&si1, sizeof(STARTUPINFO)); si1.cb = sizeof(STARTUPINFO);
 	ZeroMemory(&si2, sizeof(STARTUPINFO)); si2.cb = sizeof(STARTUPINFO);
+
+	// чтобы остальные объекты нашли этот мьютекс, ему дается имя
+	// false - создавший его поток не является владельцем
 	HANDLE hm = CreateMutex(NULL, FALSE, L"Mutex");
 
 	if (CreateProcess(pathA, NULL, NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, NULL, &si1, &pi1))

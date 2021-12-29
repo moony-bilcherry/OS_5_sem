@@ -4,6 +4,7 @@
 
 int main() {
 	DWORD pid = GetCurrentProcessId();
+	// атрибут защиты, ручной сброс, начальное состояние несигнальное, имя
 	HANDLE he = CreateEvent(NULL, TRUE, FALSE, L"Event");
 	LPCWSTR pathA = L"T:\\Uni\\5_sem\\OS\\OS_5_sem\\os_lab07\\Debug\\os07_05A.exe";
 	LPCWSTR pathB = L"T:\\Uni\\5_sem\\OS\\OS_5_sem\\os_lab07\\Debug\\os07_05B.exe";
@@ -31,6 +32,7 @@ int main() {
 	int start = clock();
 	LONG prevcount = 0;
 	for (int i = 0; i < 90; i++) {
+		// устанавливает объект события в сигнальное состояние
 		if (i == 15)
 			PulseEvent(he);
 		std::cout << i << " OS07_05 MAIN pid = " << pid << ", time: " << clock() - start << '\n';

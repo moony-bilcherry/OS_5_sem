@@ -17,6 +17,7 @@ int main() {
 	HANDLE hOne = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ChildThrOne, NULL, 0, &OneId);
 	HANDLE hTwo = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ChildThrTwo, NULL, 0, &TwoId);
 
+	// инициализация критической секци
 	InitializeCriticalSection(&cs);
 	for (int i = 0; i < 90; i++) {
 		if (i == 30) {
